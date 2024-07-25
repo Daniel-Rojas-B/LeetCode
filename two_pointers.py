@@ -14,5 +14,24 @@ class Solution(object):
                     print(str(nums[i])+'+'+str(nums[j])+"<"+str(target))
         return counter
 
+    # 2000. Reverse Prefix of Word
+
+    def reversePrefix(self, word, ch):
+        """
+        :type word: str
+        :type ch: str
+        :rtype: str
+        """
+        
+        n=len(word)
+        for i in range(n):
+            if word[i]==ch:
+                return word[i::-1]+word[i+1:n]
+        return word
+
 solution = Solution()
 print(solution.countPairs([-6,2,5,-2,-7,-1,3],-2))
+print(solution.reversePrefix('abcdefd','d'))
+
+
+        
