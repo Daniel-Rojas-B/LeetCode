@@ -1,0 +1,16 @@
+class Solution(object):
+    # 1876. Substrings of Size Three with Distinct Characters
+    def countGoodSubstrings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """    
+        counter=0
+        for i in range(len(s) - 2):
+            if s[i] != s[i+1] and s[i] != s[i+2] and s[i+1] != s[i+2]:
+                counter += 1
+
+        return counter
+
+solution = Solution()
+print(solution.countGoodSubstrings("aababcabc"))

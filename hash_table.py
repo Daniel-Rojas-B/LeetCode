@@ -55,7 +55,28 @@ class Solution(object):
         # Step 3: Extracting sorted names from the sorted pairs
         sorted_names = [names for names, heights in paired]
 
-        return sorted_names
+        return sorted_names 
+    
+    # 2956. Find Common Elements Between Two Arrays
+    
+    def findIntersectionValues(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        ans1=0
+        ans2=0
+        ans_array=[]
+        for i in range(len(nums1)):
+            if nums1[i] in nums2:
+                ans1+=1
+        for j in range(len(nums2)):
+            if nums2[j] in nums1:
+                ans2+=1
+        ans_array = [ans1,ans2]
+        return ans_array
+
            
 
 solution = Solution()
@@ -63,3 +84,4 @@ print(solution.numIdenticalPairs([1,2,3,1,1,3]))
 print(solution.smallerNumbersThanCurrent([8,1,2,2,3]))
 print(solution.alternativeSmallerNumbersThanCurrent([8,1,2,2,3]))
 print(solution.sortPeople(["Mary","John","Emma"], [180,165,170]))
+print(solution.findIntersectionValues([2,3,2],[1,2]))
