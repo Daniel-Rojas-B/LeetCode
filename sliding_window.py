@@ -66,8 +66,40 @@ class Solution(object):
         
         return ans
     
+    # 1652. Defuse the Bomb
+    def decrypt(self, code, k):
+        """
+        :type code: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        output=[]
+        for i in range(len(code)):
+            if k>0:
+                sum=0
+                j=i+1
+                m=k
+                while(m):
+                    sum+=code[j%len(code)]
+                    m-=1
+                    j+=1
+                output.append(sum)
+            elif k==0:
+                output.append(0)
+            else:
+                sum=0
+                j=i-1
+                m=k
+                while(m):
+                    sum+=code[j%len(code)]                    
+                    m+=1
+                    j-=1
+                output.append(sum)
+        return output
+        
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
 print(solution.containsNearbyDuplicate([1,2,3,1,2,3],2))
 print(solution.findLHS([1,3,2,2,5,2,3,7]))
 print(solution.numberOfAlternatingGroups([1,1,1]))
+print(solution.decrypt([2,4,9,3],-2))
