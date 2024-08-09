@@ -97,9 +97,26 @@ class Solution(object):
                 output.append(sum)
         return output
         
+    def maximumLengthSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n = len(s)
+        maxLen = 0
+        for i in range(n):
+            arr = [0] * 26
+            for j in range(i, n):
+                arr[ord(s[j]) - ord('a')] += 1
+                if arr[ord(s[j]) - ord('a')] == 3:
+                    break
+                maxLen = max(maxLen, j - i + 1)
+        return maxLen    
+
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
 print(solution.containsNearbyDuplicate([1,2,3,1,2,3],2))
 print(solution.findLHS([1,3,2,2,5,2,3,7]))
 print(solution.numberOfAlternatingGroups([1,1,1]))
 print(solution.decrypt([2,4,9,3],-2))
+print(solution.maximumLengthSubstring("bcbbbcba"))
