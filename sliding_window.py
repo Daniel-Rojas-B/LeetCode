@@ -136,6 +136,31 @@ class Solution(object):
         # If the above recursive calls don't happen that means our string has each character in lowercase and uppercase already so we can return it
         return s
 
+    # 2269. Find the K-Beauty of a Number
+    def divisorSubstrings(self, num: int, k: int) -> int:
+        l = 0
+        r = k
+
+        num = str(num)
+        count = 0
+        while r <= len(num):            
+            n = int(num[l: r])
+
+            # handle case where n could be '0'. 
+            if not n:
+                l += 1
+                r += 1
+                continue
+
+            if int(num) % n == 0:
+                count += 1   
+                
+            # slide window
+            l += 1
+            r += 1
+
+        return count
+
 
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
@@ -145,3 +170,4 @@ print(solution.numberOfAlternatingGroups([1,1,1]))
 print(solution.decrypt([2,4,9,3],-2))
 print(solution.maximumLengthSubstring("bcbbbcba"))
 print(solution.longestNiceSubstring("YazaAay"))
+print(solution.divisorSubstrings(240,2))
