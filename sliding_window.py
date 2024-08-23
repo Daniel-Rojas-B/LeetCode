@@ -160,7 +160,23 @@ class Solution(object):
             r += 1
 
         return count
-
+    # 2379. Minimum Recolors to Get K Consecutive Black Blocks
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        n, minOps, flips, count, i = len(blocks), 1e9, 0, 0, 0
+        for j in range (n):
+            if blocks[j] == 'W':
+                flips += 1
+                count += 1
+            elif blocks[j] == 'B':
+                count += 1
+            if count == k:
+                minOps = min(minOps, flips)
+                if blocks[i] == 'W':
+                    flips -= 1
+                    count -= 1
+                else: count -= 1
+                i += 1
+        return minOps
 
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
@@ -171,3 +187,4 @@ print(solution.decrypt([2,4,9,3],-2))
 print(solution.maximumLengthSubstring("bcbbbcba"))
 print(solution.longestNiceSubstring("YazaAay"))
 print(solution.divisorSubstrings(240,2))
+print(solution.minimumRecolors("WBWBBBW",2))
