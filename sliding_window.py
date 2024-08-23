@@ -1,4 +1,5 @@
 from collections import Counter
+from typing import List
 
 class Solution(object):
     # 1876. Substrings of Size Three with Distinct Characters
@@ -177,6 +178,18 @@ class Solution(object):
                 else: count -= 1
                 i += 1
         return minOps
+    # 1984. Minimum Difference Between Highest and Lowest of K Scores
+    def minimumDifference(self, nums: List[int], k: int) -> int:
+        if len(nums) <= 1:
+            return 0
+
+        nums = sorted(nums)
+        res = nums[k-1] - nums[0]
+
+        for i in range(k, len(nums)):
+            res = min(res, nums[i] - nums[i - k + 1])
+
+        return res
 
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
@@ -188,3 +201,4 @@ print(solution.maximumLengthSubstring("bcbbbcba"))
 print(solution.longestNiceSubstring("YazaAay"))
 print(solution.divisorSubstrings(240,2))
 print(solution.minimumRecolors("WBWBBBW",2))
+print(solution.minimumDifference([9,4,1,7],2))
