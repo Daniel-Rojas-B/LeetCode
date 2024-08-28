@@ -77,6 +77,19 @@ class Solution(object):
         ans_array = [ans1,ans2]
         return ans_array
 
+    # 3146. Permutation Difference between Two Strings
+    def findPermutationDifference(self, s: str, t: str) -> int:
+        ht: dict[str, int] = dict()
+        for i in range(len(s)):
+            if s[i] in ht:
+                ht[s[i]] = abs(ht[s[i]] - i)
+            else:
+                ht[s[i]] = i
+            if t[i] in ht:
+                ht[t[i]] = abs(ht[t[i]] - i)
+            else:
+                ht[t[i]] = i
+        return sum(ht.values())
            
 
 solution = Solution()
@@ -85,3 +98,4 @@ print(solution.smallerNumbersThanCurrent([8,1,2,2,3]))
 print(solution.alternativeSmallerNumbersThanCurrent([8,1,2,2,3]))
 print(solution.sortPeople(["Mary","John","Emma"], [180,165,170]))
 print(solution.findIntersectionValues([2,3,2],[1,2]))
+print(solution.findPermutationDifference("abc","bac"))
