@@ -191,6 +191,18 @@ class Solution(object):
 
         return res
 
+    # 594. Longest Harmonious Subsequence
+    class Solution:
+        def findLHS(self, nums: List[int]) -> int:
+            freq = Counter(nums)
+            max_length = 0
+            
+            for key in freq:
+                if key + 1 in freq:
+                    max_length = max(max_length, freq[key] + freq[key+1])
+                    
+            return max_length
+
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
 print(solution.containsNearbyDuplicate([1,2,3,1,2,3],2))
@@ -202,3 +214,4 @@ print(solution.longestNiceSubstring("YazaAay"))
 print(solution.divisorSubstrings(240,2))
 print(solution.minimumRecolors("WBWBBBW",2))
 print(solution.minimumDifference([9,4,1,7],2))
+print(solution.findLHS([1,3,2,2,5,2,3,7]))
