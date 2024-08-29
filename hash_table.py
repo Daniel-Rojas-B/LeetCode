@@ -1,3 +1,5 @@
+from typing import List
+from collections import defaultdict
 
 class Solution(object):
     # 1512. Number of Good Pairs: A pair (i, j) is called good if nums[i] == nums[j] and i < j.
@@ -90,7 +92,30 @@ class Solution(object):
             else:
                 ht[t[i]] = i
         return sum(ht.values())
-           
+
+    # 496. Next Greater Element I
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        d=defaultdict(lambda:0) 
+        for i in range(len(nums1)):
+            d[nums1[i]]=i 
+        st,ans=[],[0]*len(nums1) 
+        j=len(nums2)-1 
+        while j>=0:
+            if nums2[j] in d:
+                if st==[]:
+                    ans[d[nums2[j]]]=-1 
+                elif st!=[] and st[-1]>nums2[j]:
+                    ans[d[nums2[j]]]=st[-1] 
+                elif st!=[] and st[-1]<=nums2[j]:
+                    while st!=[] and st[-1]<=nums2[j]:
+                        st.pop() 
+                    if st==[]:
+                        ans[d[nums2[j]]]=-1 
+                    else:
+                        ans[d[nums2[j]]]=st[-1]
+            st.append(nums2[j]) 
+            j-=1 
+        return ans
 
 solution = Solution()
 print(solution.numIdenticalPairs([1,2,3,1,1,3]))
@@ -99,3 +124,4 @@ print(solution.alternativeSmallerNumbersThanCurrent([8,1,2,2,3]))
 print(solution.sortPeople(["Mary","John","Emma"], [180,165,170]))
 print(solution.findIntersectionValues([2,3,2],[1,2]))
 print(solution.findPermutationDifference("abc","bac"))
+print(solution.nextGreaterElement([4,1,2], [1,3,4,2]))
