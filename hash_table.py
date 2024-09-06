@@ -125,6 +125,25 @@ class Solution(object):
                     return [i, j]
         return []
 
+    # 13. Roman to Integer
+    def romanToInt(self, s: str) -> int:
+        translations = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+        number = 0
+        s = s.replace("IV", "IIII").replace("IX", "VIIII")
+        s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
+        s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
+        for char in s:
+            number += translations[char]
+        return number
+
 solution = Solution()
 print(solution.numIdenticalPairs([1,2,3,1,1,3]))
 print(solution.smallerNumbersThanCurrent([8,1,2,2,3]))
@@ -134,3 +153,4 @@ print(solution.findIntersectionValues([2,3,2],[1,2]))
 print(solution.findPermutationDifference("abc","bac"))
 print(solution.nextGreaterElement([4,1,2], [1,3,4,2]))
 print(solution.twoSum([2,7,11,15], 9))
+print(solution.romanToInt("LVIII"))
