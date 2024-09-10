@@ -143,6 +143,15 @@ class Solution(object):
         for char in s:
             number += translations[char]
         return number
+    # 49. Group Anagrams
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        dic={}
+        k=[]
+        for i in strs:
+            l="".join(sorted(i))
+            dic.setdefault(l,[]).append(i)
+      
+        return dic.values()
 
 solution = Solution()
 print(solution.numIdenticalPairs([1,2,3,1,1,3]))
@@ -154,3 +163,4 @@ print(solution.findPermutationDifference("abc","bac"))
 print(solution.nextGreaterElement([4,1,2], [1,3,4,2]))
 print(solution.twoSum([2,7,11,15], 9))
 print(solution.romanToInt("LVIII"))
+print(solution.groupAnagrams(["a"]))
