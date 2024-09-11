@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution(object):
     #1929. Concatenation of Array 
     def getConcatenation(self, nums):
@@ -46,8 +48,14 @@ class Solution(object):
             running_sum.append(running_sum[i]+nums[i+1])
         return running_sum
 
+    # 26. Remove Duplicates from Sorted Array
+    def removeDuplicates(self, nums: List[int]) -> int:
+          nums[:] = sorted(set(nums))
+          return len(nums)
+    
 solution = Solution()
 print(solution.getConcatenation([1,2,1]))
 print(solution.buildArray([0,2,1,5,3,4]))
 print(solution.maximumStrongPairXor([1,2,3,4,5]))
 print(solution.runningSum([1,2,3,4,5]))
+print(solution.removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
