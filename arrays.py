@@ -53,9 +53,23 @@ class Solution(object):
           nums[:] = sorted(set(nums))
           return len(nums)
     
+    # 27. Remove Element
+
+    def removeElement(self, nums: List[int], val: int) -> int:
+        i = 0
+        for j in range(len(nums)):
+            if nums[j] != val:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+        return i
+        
+    
+
+    
 solution = Solution()
 print(solution.getConcatenation([1,2,1]))
 print(solution.buildArray([0,2,1,5,3,4]))
 print(solution.maximumStrongPairXor([1,2,3,4,5]))
 print(solution.runningSum([1,2,3,4,5]))
 print(solution.removeDuplicates([2,1,1]))
+print(solution.removeElement([3,2,2,3],2))
