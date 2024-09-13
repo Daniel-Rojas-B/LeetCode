@@ -63,7 +63,20 @@ class Solution(object):
                 i += 1
         return i
         
-    
+    # 35. Search Insert Position
+    def searchInsert(self, nums, target):
+        l = 0
+        r = len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] < target:
+                l = mid + 1
+            elif nums[mid] > target:
+                r = mid - 1
+            else:
+                return mid
+        return l
+
 
     
 solution = Solution()
@@ -73,3 +86,4 @@ print(solution.maximumStrongPairXor([1,2,3,4,5]))
 print(solution.runningSum([1,2,3,4,5]))
 print(solution.removeDuplicates([2,1,1]))
 print(solution.removeElement([3,2,2,3],2))
+print(solution.searchInsert([1,3,5,6],7))
