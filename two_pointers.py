@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution(object):
     #2824. Count Pairs Whose Sum is Less than Target 
     def countPairs(self, nums, target):
@@ -58,11 +60,18 @@ class Solution(object):
             i += 1
             j -= 1
         return ans
+    
+    # 26. Remove Duplicates from Sorted Array
+    def removeDuplicates(self, nums: List[int]) -> int:
+            nums[:] = sorted(set(nums))
+            return len(nums)
+
 
 solution = Solution()
 print(solution.countPairs([-6,2,5,-2,-7,-1,3],-2))
 print(solution.reversePrefix('abcdefd','d'))
 print(solution.minimumAverage([1,9,8,3,10,5]))
 print(solution.alternativeMinimumAverage([1,9,8,3,10,5]))
+print(solution.removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
 
 
