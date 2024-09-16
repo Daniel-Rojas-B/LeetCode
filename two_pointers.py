@@ -66,6 +66,14 @@ class Solution(object):
             nums[:] = sorted(set(nums))
             return len(nums)
 
+    # 27. Remove Element
+    def removeElement(self, nums: List[int], val: int) -> int:
+        i = 0
+        for j in range(len(nums)):
+            if nums[j] != val:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+        return i
 
 solution = Solution()
 print(solution.countPairs([-6,2,5,-2,-7,-1,3],-2))
@@ -73,5 +81,5 @@ print(solution.reversePrefix('abcdefd','d'))
 print(solution.minimumAverage([1,9,8,3,10,5]))
 print(solution.alternativeMinimumAverage([1,9,8,3,10,5]))
 print(solution.removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
-
+print(solution.removeElement([0,1,2,2,3,0,4,2],2))
 
