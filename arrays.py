@@ -95,6 +95,28 @@ class Solution(object):
         # If all digits are 9, prepend 1 to the list
         return [1] + digits
     
+    # 1. Two Sum
+    def twoSum(self, nums, target):
+        # Create a dictionary to store numbers and their corresponding indices
+        number_map = {}
+
+        # Loop through the array
+        for i, num in enumerate(nums):
+            # Calculate the difference between the target and the current number
+            diff = target - num
+
+            # Check if the difference already exists in the dictionary
+            if diff in number_map:
+                # If it exists, return the indices of the current number and the number that adds up to the target
+                return [i, number_map[diff]]
+
+            # If it doesn't exist, add the current number and its index to the dictionary
+            number_map[num] = i
+        
+        # If no two numbers add up to the target, return None
+        return None
+
+    
 solution = Solution()
 print(solution.getConcatenation([1,2,1]))
 print(solution.buildArray([0,2,1,5,3,4]))
@@ -104,3 +126,4 @@ print(solution.removeDuplicates([2,1,1]))
 print(solution.removeElement([3,2,2,3],2))
 print(solution.searchInsert([1,3,5,6],7))
 print(solution.plusOne([1,2,3]))
+print(solution.twoSum([3,2,4],6))
