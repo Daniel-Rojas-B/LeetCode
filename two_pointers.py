@@ -74,6 +74,12 @@ class Solution(object):
                 nums[i], nums[j] = nums[j], nums[i]
                 i += 1
         return i
+    # 28. Find the Index of the First Occurrence in a String
+    def strStr(self, haystack, needle):
+        for i in range(len(haystack) - len(needle) + 1):
+            if haystack[i:i+len(needle)] == needle:
+                return i
+        return -1
 
 solution = Solution()
 print(solution.countPairs([-6,2,5,-2,-7,-1,3],-2))
@@ -82,4 +88,4 @@ print(solution.minimumAverage([1,9,8,3,10,5]))
 print(solution.alternativeMinimumAverage([1,9,8,3,10,5]))
 print(solution.removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
 print(solution.removeElement([0,1,2,2,3,0,4,2],2))
-
+print(solution.strStr("sadbutsad", "sad"))
