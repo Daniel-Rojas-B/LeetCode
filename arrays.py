@@ -116,7 +116,33 @@ class Solution(object):
         # If no two numbers add up to the target, return None
         return None
 
-    
+    # 11. Container With Most Water
+    def maxArea(self, height):
+        left = 0            # Left pointer starting from the leftmost edge
+        right = len(height) - 1  # Right pointer starting from the rightmost edge
+        maxWater = 0        # Initialize the maximum water capacity
+        
+        while left < right:
+            # Calculate the width of the container
+            width = right - left
+            
+            # Calculate the height of the container (the minimum height between the two lines)
+            h = min(height[left], height[right])
+            
+            # Calculate the water capacity of the current container
+            water = width * h
+            
+            # Update the maximum water capacity if the current container holds more water
+            maxWater = max(maxWater, water)
+            
+            # Move the pointers towards each other
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+        
+        return maxWater
+        
 solution = Solution()
 print(solution.getConcatenation([1,2,1]))
 print(solution.buildArray([0,2,1,5,3,4]))
@@ -127,3 +153,4 @@ print(solution.removeElement([3,2,2,3],2))
 print(solution.searchInsert([1,3,5,6],7))
 print(solution.plusOne([1,2,3]))
 print(solution.twoSum([3,2,4],6))
+print(solution.maxArea([1,8,6,2,5,4,8,3,7]))
