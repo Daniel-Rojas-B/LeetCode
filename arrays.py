@@ -142,7 +142,28 @@ class Solution(object):
                 right -= 1
         
         return maxWater
-        
+# 15. 3Sum
+    def threeSum(self, nums):
+            """
+            :type nums: List[int]
+            :rtype: List[List[int]]
+            """
+            res = set()
+            nums.sort()
+            for i, a in enumerate(nums):
+                if i > 0 and a == nums[i-1]: continue
+
+                l, r = i + 1, len(nums) - 1
+                while l < r:
+                    sum = a + nums[l] + nums[r]
+                    if sum > 0: r -=1
+                    elif sum < 0: l +=1
+                    else: 
+                        if (a, nums[l], nums[r]) not in res:
+                            res.add((a, nums[l], nums[r]))
+                        l +=1
+            return [list(s) for s in res]
+       
 solution = Solution()
 print(solution.getConcatenation([1,2,1]))
 print(solution.buildArray([0,2,1,5,3,4]))
@@ -154,3 +175,4 @@ print(solution.searchInsert([1,3,5,6],7))
 print(solution.plusOne([1,2,3]))
 print(solution.twoSum([3,2,4],6))
 print(solution.maxArea([1,8,6,2,5,4,8,3,7]))
+print(solution.threeSum([0,0,0]))

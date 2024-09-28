@@ -123,6 +123,7 @@ values = [3, 2, 0, -4]
 pos = 1  # Index where the cycle starts
 head = createLinkedListWithCycle(values, pos)
 
+
 solution = Solution()
 print(solution.countPairs([-6,2,5,-2,-7,-1,3],-2))
 print(solution.reversePrefix('abcdefd','d'))
