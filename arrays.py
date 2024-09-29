@@ -1,4 +1,6 @@
 from typing import List
+from typing import List
+from collections import defaultdict
 
 class Solution(object):
     #1929. Concatenation of Array 
@@ -163,6 +165,30 @@ class Solution(object):
                             res.add((a, nums[l], nums[r]))
                         l +=1
             return [list(s) for s in res]
+
+# 49. Group Anagrams    
+    def getSignature(self, s: str) -> str:
+        count = [0] * 26
+        for c in s:
+            count[ord(c) - ord('a')] += 1
+
+        result = []
+        for i in range(26):
+            if count[i] != 0:
+                result.extend([chr(i + ord('a')), str(count[i])])
+
+        return ''.join(result)
+
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        result = []
+        groups = defaultdict(list)
+
+        for s in strs:
+            groups[self.getSignature(s)].append(s)
+
+        result.extend(groups.values())
+
+        return result
        
 solution = Solution()
 print(solution.getConcatenation([1,2,1]))
@@ -176,3 +202,4 @@ print(solution.plusOne([1,2,3]))
 print(solution.twoSum([3,2,4],6))
 print(solution.maxArea([1,8,6,2,5,4,8,3,7]))
 print(solution.threeSum([0,0,0]))
+print(solution.groupAnagrams([""]))
