@@ -152,6 +152,21 @@ class Solution(object):
             dic.setdefault(l,[]).append(i)
       
         return dic.values()
+    
+    # 3. Longest Substring Without Repeating Characters
+    def lengthOfLongestSubstring(self, s):
+        seen = {}
+        l = 0
+        length = 0
+        for r in range(len(s)):
+            char = s[r]
+            if char in seen and seen[char] >= l:
+                l = seen[char] + 1
+            else:
+                length = max(length, r - l + 1)
+            seen[char] = r
+
+        return length
 
 solution = Solution()
 print(solution.numIdenticalPairs([1,2,3,1,1,3]))
@@ -164,3 +179,4 @@ print(solution.nextGreaterElement([4,1,2], [1,3,4,2]))
 print(solution.twoSum([2,7,11,15], 9))
 print(solution.romanToInt("LVIII"))
 print(solution.groupAnagrams(["a"]))
+print(solution.lengthOfLongestSubstring("abcabcbb"))
