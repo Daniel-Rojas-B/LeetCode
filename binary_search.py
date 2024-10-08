@@ -53,7 +53,31 @@ class Solution(object):
                     high = mid - 1
 
         return -1
-       
+    # 34. Find First and Last Position of Element in Sorted Array
+    def binary_search(self, nums, target, find_first):
+        s = 0
+        e = len(nums) - 1
+        index = -1
+        while s <= e:
+            mid = s + (e - s) // 2
+            if nums[mid] == target:
+                index = mid
+                if find_first:
+                    e = mid - 1  # Find first occurrence
+                else:
+                    s = mid + 1  # Find last occurrence
+            elif nums[mid] < target:
+                s = mid + 1
+            else:
+                e = mid - 1
+        return index
+
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        first = self.binary_search(nums, target, True)
+        last = self.binary_search(nums, target, False)
+        return [first, last]
+
 solution = Solution()
 print(solution.findMedianSortedArrays([1,2], [3,4]))
 print(solution.search([4,5,6,7,0,1,2], 0))
+print(solution.searchRange([5,7,7,8,8,10], 8))
