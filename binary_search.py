@@ -76,8 +76,22 @@ class Solution(object):
         first = self.binary_search(nums, target, True)
         last = self.binary_search(nums, target, False)
         return [first, last]
-
+    # 69. Sqrt(x)
+    def mySqrt(self, x: int) -> int:
+        left = 0
+        right = x
+        while left <= right:
+            mid = (left + right) // 2
+            if mid * mid < x:
+                left = mid + 1
+            elif mid * mid > x:
+                right = mid -1
+            else:
+                return mid
+            
+        return right
 solution = Solution()
 print(solution.findMedianSortedArrays([1,2], [3,4]))
 print(solution.search([4,5,6,7,0,1,2], 0))
 print(solution.searchRange([5,7,7,8,8,10], 8))
+print(solution.mySqrt(64))
