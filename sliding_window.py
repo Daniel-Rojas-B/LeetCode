@@ -1,5 +1,6 @@
 from collections import Counter
 from typing import List
+from collections import deque, defaultdict
 
 class Solution(object):
     # 1876. Substrings of Size Three with Distinct Characters
@@ -202,7 +203,40 @@ class Solution(object):
                     max_length = max(max_length, freq[key] + freq[key+1])
                     
             return max_length
+    # 30. Substring with Concatenation of All Words
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        word_len = len(words[0])
+        ori_word_dict = defaultdict(int)
+		
+        for word in words:
+            ori_word_dict[word] += 1
+        
+        all_word_len = len(words) * word_len
+        result = []
+        for i in range(word_len):
+            queue = deque()
+            word_dict = ori_word_dict.copy()
+            for j in range(i, len(s) - word_len + 1, word_len):
+                word = s[j:j + word_len]
+                if word_dict.get(word, 0) != 0:
+                    word_dict[word] -= 1
+                    queue.append(word)
+                    if sum(word_dict.values()) == 0:
+                        result.append(j - all_word_len + word_len)
+                        last_element = queue.popleft()
+                        word_dict[last_element] = word_dict.get(last_element, 0) + 1
+                else:
+                    while len(queue):
+                        last_element = queue.popleft()
+                        if last_element == word:
+                            queue.append(word)
+                            break
+                        else:
+                            word_dict[last_element] = word_dict.get(last_element, 0) + 1
+                            if word_dict[last_element] > ori_word_dict[last_element]:
+                                word_dict = ori_word_dict.copy()
 
+        return result
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
 print(solution.containsNearbyDuplicate([1,2,3,1,2,3],2))
@@ -215,3 +249,4 @@ print(solution.divisorSubstrings(240,2))
 print(solution.minimumRecolors("WBWBBBW",2))
 print(solution.minimumDifference([9,4,1,7],2))
 print(solution.findLHS([1,3,2,2,5,2,3,7]))
+print(solution.findSubstring("barfoothefoobarman", ["foo","bar"]))
