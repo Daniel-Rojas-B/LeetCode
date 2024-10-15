@@ -113,9 +113,32 @@ class Solution(object):
             else:
                 return True
         return False
+    # 81. Search in Rotated Sorted Array II
+    def search_two(self, nums: List[int], target: int) -> bool:
+        start, end = 0, len(nums) - 1
+        
+        while start <= end:
+            mid = start + (end - start) // 2
+            if nums[mid] == target:
+                return True
+            elif nums[start] < nums[mid]:
+                if nums[start] <= target < nums[mid]:
+                    end = mid - 1
+                else:
+                    start = mid + 1
+            elif nums[mid] < nums[start]:
+                if nums[mid] < target <= nums[end]:
+                    start = mid + 1
+                else:
+                    end = mid - 1
+            else:
+                start += 1
+        
+        return False
 solution = Solution()
 print(solution.findMedianSortedArrays([1,2], [3,4]))
 print(solution.search([4,5,6,7,0,1,2], 0))
 print(solution.searchRange([5,7,7,8,8,10], 8))
 print(solution.mySqrt(64))
 print(solution.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],3))
+print(solution.search_two([2,5,6,0,0,1,2],0))
