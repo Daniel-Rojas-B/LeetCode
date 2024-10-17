@@ -1,6 +1,7 @@
 from collections import Counter
 from typing import List
 from collections import deque, defaultdict
+from heapq import heappush, heappop
 
 class Solution(object):
     # 1876. Substrings of Size Three with Distinct Characters
@@ -237,6 +238,60 @@ class Solution(object):
                                 word_dict = ori_word_dict.copy()
 
         return result
+
+    # 480. Sliding Window Median
+    def find_median(self, max_heap, min_heap, heap_size):
+        if heap_size % 2 == 1:
+            return -max_heap[0]
+        else:
+            return (-max_heap[0] + min_heap[0]) / 2
+
+    def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
+        max_heap = []
+        min_heap = []
+        heap_dict = defaultdict(int)
+        result = []
+        
+        for i in range(k):
+            heappush(max_heap, -nums[i])
+            heappush(min_heap, -heappop(max_heap))
+            if len(min_heap) > len(max_heap):
+                heappush(max_heap, -heappop(min_heap))
+        
+        median = self.find_median(max_heap, min_heap, k)
+        result.append(median)
+        
+        for i in range(k, len(nums)):
+            prev_num = nums[i - k]
+            heap_dict[prev_num] += 1
+
+            balance = -1 if prev_num <= median else 1
+            
+            if nums[i] <= median:
+                balance += 1
+                heappush(max_heap, -nums[i])
+            else:
+                balance -= 1
+                heappush(min_heap, nums[i])
+            
+            if balance < 0:
+                heappush(max_heap, -heappop(min_heap))
+            elif balance > 0:
+                heappush(min_heap, -heappop(max_heap))
+
+            while max_heap and heap_dict[-max_heap[0]] > 0:
+                heap_dict[-max_heap[0]] -= 1
+                heappop(max_heap)
+            
+            while min_heap and heap_dict[min_heap[0]] > 0:
+                heap_dict[min_heap[0]] -= 1
+                heappop(min_heap)
+
+            median = self.find_median(max_heap, min_heap, k)
+            result.append(median)
+        
+        return result
+
 solution = Solution()
 print(solution.countGoodSubstrings("aababcabc"))
 print(solution.containsNearbyDuplicate([1,2,3,1,2,3],2))
@@ -249,4 +304,5 @@ print(solution.divisorSubstrings(240,2))
 print(solution.minimumRecolors("WBWBBBW",2))
 print(solution.minimumDifference([9,4,1,7],2))
 print(solution.findLHS([1,3,2,2,5,2,3,7]))
-print(solution.findSubstring("barfoothefoobarman", ["foo","bar"]))
+print(solution.findSubstring("barfoothefoobarman",["foo","bar"]))
+print(solution.medianSlidingWindow([1,3,-1,-3,5,3,6,7], 3))
