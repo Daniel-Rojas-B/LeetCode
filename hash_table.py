@@ -1,5 +1,6 @@
 from typing import List
 from collections import defaultdict
+from collections import deque, defaultdict
 
 class Solution(object):
     # 1512. Number of Good Pairs: A pair (i, j) is called good if nums[i] == nums[j] and i < j.
@@ -167,7 +168,40 @@ class Solution(object):
             seen[char] = r
 
         return length
+    # 
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        word_len = len(words[0])
+        ori_word_dict = defaultdict(int)
+		
+        for word in words:
+            ori_word_dict[word] += 1
+        
+        all_word_len = len(words) * word_len
+        result = []
+        for i in range(word_len):
+            queue = deque()
+            word_dict = ori_word_dict.copy()
+            for j in range(i, len(s) - word_len + 1, word_len):
+                word = s[j:j + word_len]
+                if word_dict.get(word, 0) != 0:
+                    word_dict[word] -= 1
+                    queue.append(word)
+                    if sum(word_dict.values()) == 0:
+                        result.append(j - all_word_len + word_len)
+                        last_element = queue.popleft()
+                        word_dict[last_element] = word_dict.get(last_element, 0) + 1
+                else:
+                    while len(queue):
+                        last_element = queue.popleft()
+                        if last_element == word:
+                            queue.append(word)
+                            break
+                        else:
+                            word_dict[last_element] = word_dict.get(last_element, 0) + 1
+                            if word_dict[last_element] > ori_word_dict[last_element]:
+                                word_dict = ori_word_dict.copy()
 
+        return result
 solution = Solution()
 print(solution.numIdenticalPairs([1,2,3,1,1,3]))
 print(solution.smallerNumbersThanCurrent([8,1,2,2,3]))
@@ -180,3 +214,4 @@ print(solution.twoSum([2,7,11,15], 9))
 print(solution.romanToInt("LVIII"))
 print(solution.groupAnagrams(["a"]))
 print(solution.lengthOfLongestSubstring("abcabcbb"))
+print(solution.findSubstring("barfoothefoobarman", words = ["foo","bar"]))
