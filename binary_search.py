@@ -135,6 +135,24 @@ class Solution(object):
                 start += 1
         
         return False
+
+    # 
+    def findMin(self, nums: List[int]) -> int:
+        l, r = 0, len(nums) - 1
+
+        while l < r:
+            m = l + (r - l) // 2
+
+            if nums[l] < nums[r]:
+                return nums[l]
+
+            if nums[l] <= nums[m]:
+                l = m + 1
+            else:
+                r = m
+
+        return nums[l]
+
 solution = Solution()
 print(solution.findMedianSortedArrays([1,2], [3,4]))
 print(solution.search([4,5,6,7,0,1,2], 0))
@@ -142,3 +160,4 @@ print(solution.searchRange([5,7,7,8,8,10], 8))
 print(solution.mySqrt(64))
 print(solution.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],3))
 print(solution.search_two([2,5,6,0,0,1,2],0))
+print(solution.findMin([11,13,15,17]))
