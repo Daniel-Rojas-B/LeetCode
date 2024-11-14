@@ -219,7 +219,29 @@ class Solution(object):
     def is_unit_valid(self, unit):
         unit = [i for i in unit if i != '.']
         return len(set(unit)) == len(unit)
+
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        dp = [[] for _ in range(target + 1)]
+        dp[0].append([])
+
+        for i in range(1, target + 1):
+            for candidate in candidates:
+                if candidate <= i:
+                    for prev in dp[i - candidate]:
+                        temp = prev + [candidate]
+                        temp.sort()
+                        if temp not in dp[i]:
+                            dp[i].append(temp)
+        return dp[target] 
+
 solution = Solution()
+    
+
 print(solution.getConcatenation([1,2,1]))
 print(solution.buildArray([0,2,1,5,3,4]))
 print(solution.maximumStrongPairXor([1,2,3,4,5]))
@@ -242,3 +264,4 @@ print(solution.isValidSudoku(board =
 ,[".","6",".",".",".",".","2","8","."]
 ,[".",".",".","4","1","9",".",".","5"]
 ,[".",".",".",".","8",".",".","7","9"]]))
+print(solution.combinationSum([2,3,6,7],7))
