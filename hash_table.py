@@ -202,6 +202,48 @@ class Solution(object):
                                 word_dict = ori_word_dict.copy()
 
         return result
+    
+    # 76. Minimum Window Substring
+    def minWindow(self, s, t) -> str:
+        if not s or not t:
+            return ""
+
+        dictT = {}
+        for c in t:
+            dictT[c] = dictT.get(c, 0) + 1
+
+        required = len(dictT)
+        l, r = 0, 0
+        formed = 0
+
+        windowCounts = {}
+        ans = [-1, 0, 0]
+
+        while r < len(s):
+            c = s[r]
+            windowCounts[c] = windowCounts.get(c, 0) + 1
+
+            if c in dictT and windowCounts[c] == dictT[c]:
+                formed += 1
+
+            while l <= r and formed == required:
+                c = s[l]
+
+                if ans[0] == -1 or r - l + 1 < ans[0]:
+                    ans[0] = r - l + 1
+                    ans[1] = l
+                    ans[2] = r
+
+                windowCounts[c] -= 1
+                if c in dictT and windowCounts[c] < dictT[c]:
+                    formed -= 1
+
+                l += 1
+
+            r += 1
+
+        return "" if ans[0] == -1 else s[ans[1]: ans[2] + 1]
+
 solution = Solution()
 print(solution.numIdenticalPairs([1,2,3,1,1,3]))
 print(solution.smallerNumbersThanCurrent([8,1,2,2,3]))
@@ -215,3 +257,4 @@ print(solution.romanToInt("LVIII"))
 print(solution.groupAnagrams(["a"]))
 print(solution.lengthOfLongestSubstring("abcabcbb"))
 print(solution.findSubstring("barfoothefoobarman", words = ["foo","bar"]))
+print(solution.minWindow(s = "ADOBECODEBANC", t = "ABC"))
