@@ -173,7 +173,21 @@ class Solution(object):
             else:
                 high = mid -1
         return -1
+    
+    # 167. Two Sum II - Input Array Is Sorted
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        left = 0
+        right = len(numbers) - 1
 
+        while left < right:
+            total = numbers[left] + numbers[right]
+
+            if total == target:
+                return [left + 1, right + 1]
+            elif total > target:
+                right -= 1
+            else:
+                left += 1
 solution = Solution()
 print(solution.findMedianSortedArrays([1,2], [3,4]))
 print(solution.search([4,5,6,7,0,1,2], 0))
@@ -183,3 +197,4 @@ print(solution.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],3))
 print(solution.search_two([2,5,6,0,0,1,2],0))
 print(solution.findMin([11,13,15,17]))
 print(solution.findPeakElement([1,2,1,3,5,6,4]))
+print(solution.twoSum([2,7,11,15], 9))
