@@ -188,6 +188,17 @@ class Solution(object):
                 right -= 1
             else:
                 left += 1
+    
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        v = [-1] * (n + 1)
+        for num in nums:
+            v[num] = num
+        for i in range(len(v)):
+            if v[i] == -1:
+                return i
+        return 0
+
 solution = Solution()
 print(solution.findMedianSortedArrays([1,2], [3,4]))
 print(solution.search([4,5,6,7,0,1,2], 0))
@@ -198,3 +209,4 @@ print(solution.search_two([2,5,6,0,0,1,2],0))
 print(solution.findMin([11,13,15,17]))
 print(solution.findPeakElement([1,2,1,3,5,6,4]))
 print(solution.twoSum([2,7,11,15], 9))
+print(solution.missingNumber([3,0,1]))
