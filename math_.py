@@ -41,6 +41,18 @@ class Solution(object):
 
         return dummy.next
 
+    def reverse(self, x: int) -> int:
+        mod = 2**31  # Modulo for overflow checking
+        sign = -1 if x < 0 else 1
+        x *= sign
+        
+        reversed_number = int(str(x)[::-1])
+        
+        # Check for overflow
+        if reversed_number > mod - 1:
+            return 0
+        return sign * reversed_number
+    
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -48,6 +60,8 @@ def linked_list_to_list(head):
         result.append(head.val)
         head = head.next
     return result
+
+
 
 # Input lists
 list1 = [2, 4, 3]
@@ -62,4 +76,6 @@ result = solution.addTwoNumbers(l1, l2)
 
 output = linked_list_to_list(result)
 print(output)
+
+print(solution.reverse(123))
 
