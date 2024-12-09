@@ -53,6 +53,20 @@ class Solution(object):
             return 0
         return sign * reversed_number
     
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0:
+            return False
+
+        reversed_num = 0
+        temp = x
+
+        while temp != 0:
+            digit = temp % 10
+            reversed_num = reversed_num * 10 + digit
+            temp //= 10
+
+        return reversed_num == x
+    
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -78,4 +92,4 @@ output = linked_list_to_list(result)
 print(output)
 
 print(solution.reverse(123))
-
+print(solution.isPalindrome(1221))
