@@ -66,6 +66,15 @@ class Solution(object):
             temp //= 10
 
         return reversed_num == x
+
+    def intToRoman(self, num: int) -> str:
+        Roman = ""
+        storeIntRoman = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]]
+        for i in range(len(storeIntRoman)):
+            while num >= storeIntRoman[i][0]:
+                Roman += storeIntRoman[i][1]
+                num -= storeIntRoman[i][0]
+        return Roman
     
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
@@ -74,8 +83,6 @@ def linked_list_to_list(head):
         result.append(head.val)
         head = head.next
     return result
-
-
 
 # Input lists
 list1 = [2, 4, 3]
@@ -93,3 +100,4 @@ print(output)
 
 print(solution.reverse(123))
 print(solution.isPalindrome(1221))
+print(solution.intToRoman(3749))
