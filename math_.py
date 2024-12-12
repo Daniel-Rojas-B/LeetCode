@@ -75,6 +75,24 @@ class Solution(object):
                 Roman += storeIntRoman[i][1]
                 num -= storeIntRoman[i][0]
         return Roman
+
+    def romanToInt(self, s: str) -> int:
+        translations = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+        number = 0
+        s = s.replace("IV", "IIII").replace("IX", "VIIII")
+        s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
+        s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
+        for char in s:
+            number += translations[char]
+        return number
     
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
@@ -101,3 +119,4 @@ print(output)
 print(solution.reverse(123))
 print(solution.isPalindrome(1221))
 print(solution.intToRoman(3749))
+print(solution.romanToInt("MCMXCIV"))
