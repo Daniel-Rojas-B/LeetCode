@@ -94,6 +94,21 @@ class Solution(object):
             number += translations[char]
         return number
     
+    def divide(self, dividend, divisor):
+        positive = (dividend < 0) is (divisor < 0)
+        dividend, divisor = abs(dividend), abs(divisor)
+        res = 0
+        while dividend >= divisor:
+            temp, i = divisor, 1
+            while dividend >= temp:
+                dividend -= temp
+                res += i
+                i <<= 1
+                temp <<= 1
+        if not positive:
+            res = -res
+        return min(max(-2147483648, res), 2147483647)
+
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -120,3 +135,4 @@ print(solution.reverse(123))
 print(solution.isPalindrome(1221))
 print(solution.intToRoman(3749))
 print(solution.romanToInt("MCMXCIV"))
+print(solution.divide(10,3))
