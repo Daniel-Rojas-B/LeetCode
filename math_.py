@@ -129,6 +129,16 @@ class Solution(object):
         
         return encode(decode(num1)*decode(num2))
 
+    def rotate(self, A):
+        n = len(A)
+        for i in range(n):
+            for j in range(i):
+                A[i][j], A[j][i] = A[j][i], A[i][j]
+        for row in A:
+            for j in range(n//2):
+                row[j], row[~j] = row[~j], row[j]
+        return A
+
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -157,3 +167,4 @@ print(solution.intToRoman(3749))
 print(solution.romanToInt("MCMXCIV"))
 print(solution.divide(10,3))
 print(solution.multiply("2","3"))
+print(solution.rotate([[1,2,3],[4,5,6],[7,8,9]]))
