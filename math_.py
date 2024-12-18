@@ -109,6 +109,26 @@ class Solution(object):
             res = -res
         return min(max(-2147483648, res), 2147483647)
 
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == '0' or num2 == '0':
+            return '0'
+        
+        def decode(num):
+            ans = 0
+            for i in num:
+                ans = ans*10 +(ord(i) - ord('0'))
+            return ans
+
+        def encode(s):
+            news = ''
+            while s:
+                a = s % 10
+                s = s // 10
+                news = chr(ord('0') + a) + news
+            return news
+        
+        return encode(decode(num1)*decode(num2))
+
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -136,3 +156,4 @@ print(solution.isPalindrome(1221))
 print(solution.intToRoman(3749))
 print(solution.romanToInt("MCMXCIV"))
 print(solution.divide(10,3))
+print(solution.multiply("2","3"))
