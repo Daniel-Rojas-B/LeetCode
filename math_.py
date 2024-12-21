@@ -139,6 +139,15 @@ class Solution(object):
                 row[j], row[~j] = row[~j], row[j]
         return A
 
+    def myPow(self, x, n):
+        if not n:
+            return 1
+        if n < 0:
+            return 1 / self.myPow(x, -n)
+        if n % 2:
+            return x * self.myPow(x, n-1)
+        return self.myPow(x*x, n/2)
+
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -168,3 +177,4 @@ print(solution.romanToInt("MCMXCIV"))
 print(solution.divide(10,3))
 print(solution.multiply("2","3"))
 print(solution.rotate([[1,2,3],[4,5,6],[7,8,9]]))
+print(solution.myPow(2,10))
