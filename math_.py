@@ -2,6 +2,7 @@ from typing import List
 from typing import List
 from collections import defaultdict
 from typing import Optional
+import math
 
 class ListNode:
     def __init__(self, val=0, next: Optional['ListNode'] = None):
@@ -148,6 +149,24 @@ class Solution(object):
             return x * self.myPow(x, n-1)
         return self.myPow(x*x, n/2)
 
+    # @param {integer} n
+    # @param {integer} k
+    # @return {string}
+    def getPermutation(self, n, k):
+    # Convert the range to a list so we can modify it
+        numbers = list(range(1, n + 1))
+        permutation = ''
+        k -= 1  # To make k zero-indexed
+        while n > 0:
+            n -= 1
+            # Get the index of the current digit
+            index, k = divmod(k, math.factorial(n))
+            permutation += str(numbers[index])
+            # Remove the handled number
+            numbers.pop(index)  # Use pop instead of remove for efficiency
+
+        return permutation
+
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -178,3 +197,4 @@ print(solution.divide(10,3))
 print(solution.multiply("2","3"))
 print(solution.rotate([[1,2,3],[4,5,6],[7,8,9]]))
 print(solution.myPow(2,10))
+print(solution.getPermutation(3,3))
