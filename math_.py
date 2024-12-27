@@ -166,6 +166,32 @@ class Solution(object):
             numbers.pop(index)  # Use pop instead of remove for efficiency
 
         return permutation
+    
+    # math C(m+n-2,n-1)
+    def uniquePaths1(self, m, n):
+        if not m or not n:
+            return 0
+        return math.factorial(m+n-2)/(math.factorial(n-1) * math.factorial(m-1))
+    
+    # O(m*n) space   
+    def uniquePaths2(self, m, n):
+        if not m or not n:
+            return 0
+        dp = [[1 for _ in range(n)] for _ in range(m)]
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        return dp[-1][-1]
+
+    # O(n) space 
+    def uniquePaths(self, m, n):
+        if not m or not n:
+            return 0
+        cur = [1] * n
+        for i in range(1, m):
+            for j in range(1, n):
+                cur[j] += cur[j-1]
+        return cur[-1]
 
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
@@ -198,3 +224,4 @@ print(solution.multiply("2","3"))
 print(solution.rotate([[1,2,3],[4,5,6],[7,8,9]]))
 print(solution.myPow(2,10))
 print(solution.getPermutation(3,3))
+print(solution.uniquePaths(3,7))
