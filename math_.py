@@ -210,6 +210,24 @@ class Solution(object):
         # If all digits are 9, prepend 1 to the list
         return [1] + digits
 
+    def addBinary(self, a: str, b: str) -> str:
+        s = []
+        carry = 0
+        i = len(a) - 1
+        j = len(b) - 1
+
+        while i >= 0 or j >= 0 or carry:
+            if i >= 0:
+                carry += int(a[i])
+                i -= 1
+            if j >= 0:
+                carry += int(b[j])
+                j -= 1
+            s.append(str(carry % 2))
+            carry //= 2
+
+        return ''.join(reversed(s))
+
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -243,3 +261,4 @@ print(solution.myPow(2,10))
 print(solution.getPermutation(3,3))
 print(solution.uniquePaths(3,7))
 print(solution.plusOne([4,3,2,1]))
+print(solution.addBinary("11","1"))
