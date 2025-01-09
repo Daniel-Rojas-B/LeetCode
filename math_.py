@@ -2,6 +2,8 @@ from typing import List
 from typing import List
 from collections import defaultdict
 from typing import Optional
+from bisect import bisect_right
+
 import math
 
 class ListNode:
@@ -228,6 +230,9 @@ class Solution(object):
 
         return ''.join(reversed(s))
 
+    def mySqrt(self, x: int) -> int:
+        return bisect_right(range(x+1),0,key=lambda q:q*q-x)-1
+
 def linked_list_to_list(head):
     """Convert a linked list back to a Python list."""
     result = []
@@ -262,3 +267,4 @@ print(solution.getPermutation(3,3))
 print(solution.uniquePaths(3,7))
 print(solution.plusOne([4,3,2,1]))
 print(solution.addBinary("11","1"))
+print(solution.mySqrt(16))
