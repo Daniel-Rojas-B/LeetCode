@@ -3,6 +3,22 @@ from typing import List
 from collections import defaultdict
 
 class Solution(object):
+    # 11. Container With Most Water
+    def maxArea(self, height: List[int]) -> int:
+        left = 0
+        right = len(height) - 1
+        maxArea = 0
+
+        while left < right:
+            currentArea = min(height[left], height[right]) * (right - left)
+            maxArea = max(maxArea, currentArea)
+
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+
+        return maxArea
     #1929. Concatenation of Array 
     def getConcatenation(self, nums):
         """
@@ -286,3 +302,4 @@ print(solution.isValidSudoku(board =
 ,[".",".",".",".","8",".",".","7","9"]]))
 print(solution.combinationSum([2,3,6,7],7))
 print(solution.combinationSum2([10,1,2,7,6,1,5], 8))
+print(solution.maxArea([1,8,6,2,5,4,8,3,7]))
