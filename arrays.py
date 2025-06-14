@@ -273,6 +273,34 @@ class Solution(object):
                 current.append(candidates[i])
                 self.backtrack(result, current, candidates, remaining - candidates[i], i + 1)
                 current.pop()
+        
+    # 15. 3Sum
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+
+        for i in range(len(nums)):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            
+            j = i + 1
+            k = len(nums) - 1
+
+            while j < k:
+                total = nums[i] + nums[j] + nums[k]
+
+                if total > 0:
+                    k -= 1
+                elif total < 0:
+                    j += 1
+                else:
+                    res.append([nums[i], nums[j], nums[k]])
+                    j += 1
+
+                    while nums[j] == nums[j-1] and j < k:
+                        j += 1
+        
+        return res
 
 solution = Solution()
     
@@ -303,3 +331,4 @@ print(solution.isValidSudoku(board =
 print(solution.combinationSum([2,3,6,7],7))
 print(solution.combinationSum2([10,1,2,7,6,1,5], 8))
 print(solution.maxArea([1,8,6,2,5,4,8,3,7]))
+print(solution.threeSum([-1,0,1,2,-1,-4]))
