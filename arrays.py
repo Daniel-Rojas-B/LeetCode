@@ -301,10 +301,25 @@ class Solution(object):
                         j += 1
         
         return res
+    # 16. 3Sum closest
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        diff = float("inf")
+        nums.sort()
+        for i in range(len(nums)):
+            lo, hi = i + 1, len(nums) - 1
+            while lo < hi:
+                sum = nums[i] + nums[lo] + nums[hi]
+                if abs(target - sum) < abs(diff):
+                    diff = target - sum
+                if sum < target:
+                    lo += 1
+                else:
+                    hi -= 1
+            if diff == 0:
+                break
+        return target - diff
 
 solution = Solution()
-    
-
 
 print(solution.getConcatenation([1,2,1]))
 print(solution.buildArray([0,2,1,5,3,4]))
@@ -332,3 +347,4 @@ print(solution.combinationSum([2,3,6,7],7))
 print(solution.combinationSum2([10,1,2,7,6,1,5], 8))
 print(solution.maxArea([1,8,6,2,5,4,8,3,7]))
 print(solution.threeSum([-1,0,1,2,-1,-4]))
+print(solution.threeSumClosest([-1,2,1,-4],1))
